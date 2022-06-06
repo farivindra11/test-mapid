@@ -13,6 +13,7 @@ const Map = () => {
     });
 
     const [dataApi, setDataApi] = useState([])
+    const [showPopup, setShowPopup] =useState(true);
 
     useEffect(() => {
         try {
@@ -24,7 +25,29 @@ const Map = () => {
         }
     }, [])
 
-    console.log(dataApi);
+    const tes = () => {
+        const data = []
+
+        for (let index = 0; index < dataApi?.features?.length; index++) {
+            if (dataApi.features[index].properties.Status === "Merah") { 
+                // console.log("#8b0000");
+
+                data.push("#8b0000")
+            }
+            else if (dataApi.features[index].properties.Status === "Kuning") { 
+                // console.log("#ffff00ff");
+                data.push("#ffff00");
+             }
+            else if (dataApi.features[index].properties.Status === "Hijau") {
+                //  console.log("#006400ff"); 
+                 data.push("#006400");
+                }
+            }
+            console.log(data, 'data loop');
+    }
+    tes()
+
+
 
     return (
         <div>
@@ -43,8 +66,9 @@ const Map = () => {
                     type='circle'
                     source='points'
                     paint={{
-                        'circle-radius': 6,
-                        'circle-color': '#1978c8'
+                        'circle-radius': ['get', 'circle_radius'],
+                        'circle-color': '#fbb03b'
+                        
                     }}
                 />
             </MapGL>
